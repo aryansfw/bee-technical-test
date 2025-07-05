@@ -8,7 +8,7 @@ import { cn } from "../lib/utils";
 
 export default function Navbar() {
   return (
-    <nav className="hidden md:block min-h-screen bg-white shadow-2xl px-4 py-8 min-w-80">
+    <nav className="hidden md:block h-screen bg-white shadow-2xl px-4 py-8 min-w-80 overflow-auto">
       <div className="flex flex-col justify-between h-full">
         <div className="flex flex-col gap-16 justify-center">
           <div className="px-5">

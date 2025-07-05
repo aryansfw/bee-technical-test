@@ -34,7 +34,7 @@ export default async function UsersPage(props: {
       </div>
       <section>
         <div className="w-full flex flex-col gap-8 px-8 py-8 rounded-xl bg-white shadow-lg">
-          <div className="overflow-scroll">
+          <div className="overflow-auto">
             <UsersTable currentPage={currentPage} />
           </div>
           <UsersPagination totalPages={totalPages} />

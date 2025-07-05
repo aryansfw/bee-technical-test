@@ -28,19 +28,19 @@ export default async function UsersTable({
     <table className="table w-full">
       <thead className="text-left bg-gray-200 rounded-lg md:text-base text-sm">
         <tr>
-          <th scope="col" className="font-medium px-4 py-2">
+          <th scope="col" className="font-medium px-5 py-6">
             Avatar
           </th>
-          <th scope="col" className="font-medium px-3 py-3">
+          <th scope="col" className="font-medium px-3 py-6">
             First Name
           </th>
-          <th scope="col" className="font-medium px-3 py-3">
+          <th scope="col" className="font-medium px-3 py-6">
             Last Name
           </th>
-          <th scope="col" className="font-medium px-3 py-3">
+          <th scope="col" className="font-medium px-3 py-6">
             Email
           </th>
-          <th scope="col" className="font-medium px-3 py-3">
+          <th scope="col" className="font-medium px-3 py-6">
             Action
           </th>
         </tr>
@@ -51,7 +51,7 @@ export default async function UsersTable({
             key={user.id}
             className="py-3 border-b border-gray-200 hover:bg-gray-100 md:text-base text-sm"
           >
-            <td className="px-4 py-3">
+            <td className="px-5 py-3">
               <div className="flex w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden relative">
                 <Image src={user.avatar} alt={"user avatar"} fill />
               </div>
