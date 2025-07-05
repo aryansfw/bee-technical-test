@@ -1,10 +1,13 @@
+import { Icon } from "@phosphor-icons/react";
 import { forwardRef } from "react";
 import { cn } from "../lib/utils";
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {};
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  icon?: Icon;
+};
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, icon: Icon, ...props }, ref) => {
     return (
       <button
         ref={ref}
@@ -16,6 +19,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...props}
       >
+        {Icon && <Icon size={24} className="mr-2" />}
         {props.children}
       </button>
     );

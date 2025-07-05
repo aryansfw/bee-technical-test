@@ -3,9 +3,10 @@ import { Poppins } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
-const poppinsSans = Poppins({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-poppins-sans",
+  display: "swap",
+  variable: "--font-poppins",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
@@ -21,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppinsSans.variable} antialiased bg-gray-100`}>
+      <body className={`${poppins.className} antialiased bg-gray-100`}>
         {children}
         <Toaster />
       </body>

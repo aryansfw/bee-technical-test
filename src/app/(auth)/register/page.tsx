@@ -1,14 +1,16 @@
 "use client";
 
-import Button from "@/app/components/button";
-import Input from "@/app/components/input";
 import { RegisterSchema } from "@/app/schemas/auth";
 import { RegisterRequest } from "@/app/types/auth";
+import Button from "@/app/ui/button";
+import Input from "@/app/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -35,6 +37,12 @@ export default function LoginPage() {
       });
       return;
     }
+
+    toast.success("Registration successful! Redirecting...", {
+      position: "bottom-right",
+    });
+
+    router.push("/");
   };
 
   return (
@@ -47,7 +55,7 @@ export default function LoginPage() {
           <h1 className="text-4xl font-bold">Welcome!</h1>
           <p>Please register a new account :)</p>
         </div>
-        <div className="mt-12 space-y-4 w-full">
+        <div className="mt-8 space-y-4 w-full">
           <Input
             label="Email"
             placeholder="Email"
@@ -70,7 +78,7 @@ export default function LoginPage() {
           />
         </div>
 
-        <Button className="mt-16">Login</Button>
+        <Button className="mt-12">Register</Button>
       </form>
     </div>
   );
