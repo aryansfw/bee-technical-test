@@ -93,6 +93,12 @@ $ cd bee-technical-test
 $ npm install
 ```
 
+<li>Salin file konfigurasi environment: Salin file <code>.env.example</code> dan ubah namanya menjadi <code>.env</code> </li>
+
+```console
+$ cp .env.example .env
+```
+
 <li> Build project </li>
 
 ```console
