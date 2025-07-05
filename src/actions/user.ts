@@ -70,7 +70,7 @@ export async function editUser(
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/users/${id}`,
     {
-      method: "POST",
+      method: "PUT",
       headers: {
         "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
         "Content-Type": "application/json",

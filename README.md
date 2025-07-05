@@ -1,36 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bee Technical Test
 
-## Getting Started
+oleh Aryan Shafa Wardana
 
-First, run the development server:
+## Teknologi yang Digunakan
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<ol>
+<li>Next.js</li>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Dikutip dari [situs resmi Next.js](https://nextjs.org/docs), Next.js merupakan _framework_ React yang digunakan untuk membangun aplikasi _full-stack_. React digunakan dalam pembentukan komponen dan antarmuka pengguna. Sementara itu, Next.js digunakan untuk fitur tambahan dan optimisasi. Selain itu, Next.js menangani konfigurasi tingkat rendah (_low-level_), sehingga aplikasi dapat dikembangkan dan dideploy dengan cepat.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Versi 15.3.5 menyediakan Next.js menggunakan fitur App Router, yang mendukung penggunaan komponen server. Implementasi integrasi api, yang terdiri dari pengambilan data (GET), pengiriman data (POST), dan penghapusan
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<li>Tailwind CSS</li>
+<li>Zod</li>
+<li>React Hot Toast</li>
+</ol>
