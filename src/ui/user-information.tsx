@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { User } from "../types/user";
 import Button from "./button";
+import DeleteUserForm from "./users/delete-button";
 
 export default function UserInformation({ user }: { user: User }) {
   return (
@@ -12,9 +13,12 @@ export default function UserInformation({ user }: { user: User }) {
           <Image src={user.avatar} alt="user avatar" fill={true} />
         </div>
 
-        <Link href={`/users/${user.id}/edit`}>
-          <Button icon={PencilSimpleIcon}>Edit</Button>
-        </Link>
+        <div className="flex gap-2">
+          <Link href={`/users/${user.id}/edit`}>
+            <Button icon={PencilSimpleIcon}>Edit</Button>
+          </Link>
+          <DeleteUserForm id={user.id.toString()} />
+        </div>
       </div>
       <table>
         <tbody className="text-lg">

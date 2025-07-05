@@ -21,7 +21,7 @@ export default async function UserProfilePage(props: {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-4xl font-bold">Users Profile</h1>
+      <h1 className="text-4xl font-bold">User Profile</h1>
       <section>
         <UserInformation user={user} />
       </section>

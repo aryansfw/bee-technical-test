@@ -33,7 +33,12 @@ export type RegisterState = State<{
   confirmPassword?: string[];
 }>;
 
-export async function addUser(_prevState: UserState, formData: FormData) {
+export type DeleteState = State<undefined>;
+
+export async function addUser(
+  _prevState: UserState,
+  formData: FormData
+): Promise<UserState> {
   const data = {
     name: formData.get("name"),
     job: formData.get("job"),
@@ -77,7 +82,7 @@ export async function editUser(
   id: string,
   _prevState: UserState,
   formData: FormData
-) {
+): Promise<UserState> {
   const data = {
     name: formData.get("name"),
     job: formData.get("job"),
@@ -93,14 +98,17 @@ export async function editUser(
     };
   }
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/users`, {
-    method: "POST",
-    headers: {
-      "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/users/${id}`,
+    {
+      method: "POST",
+      headers: {
+        "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
 
   if (!res.ok) {
     return {
@@ -114,6 +122,32 @@ export async function editUser(
   return {
     success: true,
     message: "User edited successfully",
+  };
+}
+
+export async function deleteUser(id: string): Promise<DeleteState> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/users/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!res.ok) {
+    return {
+      success: false,
+      message: "Failed to delete user",
+    };
+  }
+  revalidatePath("/users");
+
+  return {
+    success: true,
+    message: "User deleted successfully",
   };
 }
 
