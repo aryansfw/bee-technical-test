@@ -1,4 +1,4 @@
-import EditUserForm from "@/app/ui/users/edit-form";
+import EditUserForm from "@/ui/users/edit-form";
 
 export default async function EditUserPage(props: {
   params: Promise<{ id: string }>;

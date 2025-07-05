@@ -1,8 +1,8 @@
-import { PaginatedApiResponse } from "@/app/types/api";
-import { User } from "@/app/types/user";
-import Button from "@/app/ui/button";
-import UsersPagination from "@/app/ui/users/pagination";
-import UsersTable from "@/app/ui/users/table";
+import Button from "@/ui/button";
+import UsersPagination from "@/ui/users/pagination";
+import UsersTable from "@/ui/users/table";
+import { PaginatedApiResponse } from "@/types/api";
+import { User } from "@/types/user";
 import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 

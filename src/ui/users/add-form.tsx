@@ -1,6 +1,6 @@
 "use client";
 
-import { addUser, UserState } from "@/app/lib/actions";
+import { addUser, UserState } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import toast from "react-hot-toast";

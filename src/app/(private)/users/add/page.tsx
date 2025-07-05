@@ -1,4 +1,4 @@
-import AddUserForm from "@/app/ui/users/add-form";
+import AddUserForm from "@/ui/users/add-form";
 
 export default function AddUserPage() {
   return (

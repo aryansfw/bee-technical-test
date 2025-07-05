@@ -1,5 +1,6 @@
 "use client";
 
+import { logout } from "@/lib/actions";
 import { HouseIcon, Icon, SignOutIcon, UsersIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,14 +17,26 @@ export default function Navbar() {
 
           <ul className="space-y-4">
             <li>
-              <NavItem href="/" icon={HouseIcon} label="Dashboard" />
+              <NavItem href="/" icon={HouseIcon} label="Home" />
             </li>
             <li>
               <NavItem href="/users" icon={UsersIcon} label="Users" />
             </li>
           </ul>
         </div>
-        <NavItem href="/logout" icon={SignOutIcon} label="Logout" />
+        <button
+          onClick={() => {
+            logout();
+          }}
+          className={cn(
+            "flex items-center gap-4 text-lg",
+            "px-5 py-4 rounded-md w-full text-left",
+            "hover:bg-blue-100 cursor-pointer"
+          )}
+        >
+          <SignOutIcon size={24} />
+          Logout
+        </button>
       </div>
     </nav>
   );
@@ -46,8 +59,8 @@ function NavItem({
       href={href}
       className={cn(
         "flex items-center gap-4 text-lg",
-        "px-5 py-4 rounded-md",
-        isActive ? "bg-blue-500 text-white" : ""
+        "px-5 py-4 rounded-md hover:bg-blue-100",
+        isActive ? "bg-blue-500 hover:bg-blue-500 text-white" : ""
       )}
     >
       <Icon size={24} />

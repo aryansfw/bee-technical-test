@@ -1,55 +1,48 @@
 "use client";
 
-import { RegisterSchema } from "@/app/schemas/auth";
-import { RegisterRequest } from "@/app/types/auth";
-import Button from "@/app/ui/button";
-import Input from "@/app/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { register, RegisterState } from "@/lib/actions";
+import Button from "@/ui/button";
+import Input from "@/ui/input";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useActionState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
+  const initialState: RegisterState = {
+    message: "",
+    errors: {} as {
+      email?: string[];
+      password?: string[];
+      confirmPassword?: string[];
+    },
+  };
+  const [state, formAction] = useActionState(register, initialState);
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<RegisterRequest>({
-    resolver: zodResolver(RegisterSchema),
-  });
 
-  const onSubmit = async (data: RegisterRequest) => {
-    const body = {
-      email: data.email,
-      password: data.password,
-    };
-    const res = await fetch("/api/register", {
-      method: "POST",
-      body: JSON.stringify(body),
-    });
-
-    const json = await res.json();
-
-    if (!res.ok) {
-      toast.error("Error: " + json.error || "Something went wrong", {
+  useEffect(() => {
+    if (state.success && state.message) {
+      toast.success(state.message, {
         position: "bottom-right",
+        duration: 3000,
       });
-      return;
+
+      router.push("/");
     }
 
-    toast.success("Registration successful! Redirecting...", {
-      position: "bottom-right",
-    });
-
-    router.push("/");
-  };
+    if (!state.success && state.message) {
+      toast.error(state.message, {
+        position: "bottom-right",
+        duration: 3000,
+      });
+    }
+  }, [state.success, state.message, router]);
 
   return (
     <div className="flex justify-center items-center w-screen h-screen">
       <form
         className="flex flex-col items-center min-w-[500px] rounded-xl bg-white px-16 py-20"
-        onSubmit={handleSubmit(onSubmit)}
+        action={formAction}
       >
         <div className="space-y-2 text-center">
           <h1 className="text-4xl font-bold">Welcome!</h1>
@@ -59,26 +52,37 @@ export default function LoginPage() {
           <Input
             label="Email"
             placeholder="Email"
-            {...register("email")}
-            error={errors.email?.message}
+            name="email"
+            error={state.errors?.email?.[0]}
           />
           <Input
             label="Password"
             placeholder="Password"
             type="password"
-            {...register("password")}
-            error={errors.password?.message}
+            name="password"
+            error={state.errors?.password?.[0]}
           />
           <Input
             label="Confirm Password"
             placeholder="Confirm Password"
             type="password"
-            {...register("confirmPassword")}
-            error={errors.confirmPassword?.message}
+            name="confirmPassword"
+            error={state.errors?.confirmPassword?.[0]}
           />
         </div>
 
-        <Button className="mt-12">Register</Button>
+        <div className="w-full text-right">
+          <Button className="mt-12">Register</Button>
+          <span className="text-sm text-gray-600">
+            Already have an account?{" "}
+            <Link
+              href={"/login"}
+              className="text-blue-500 hover:underline hover:text-blue-600"
+            >
+              Login
+            </Link>
+          </span>
+        </div>
       </form>
     </div>
   );

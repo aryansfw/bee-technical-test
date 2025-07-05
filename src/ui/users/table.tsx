@@ -1,5 +1,5 @@
-import { PaginatedApiResponse } from "@/app/types/api";
-import { User } from "@/app/types/user";
+import { PaginatedApiResponse } from "@/types/api";
+import { User } from "@/types/user";
 import { EyeIcon } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";

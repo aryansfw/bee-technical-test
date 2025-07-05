@@ -16,7 +16,7 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-4xl font-bold">Dashboard</h1>
+      <h1 className="text-4xl font-bold">Home</h1>
       <section>
         <div className="flex flex-col gap-8 px-8 py-8 rounded-xl bg-white min-w-lg w-fit shadow-lg">
           <span className="text-gray-500">Your Information:</span>

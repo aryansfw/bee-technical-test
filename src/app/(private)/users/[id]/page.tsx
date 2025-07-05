@@ -1,6 +1,6 @@
-import { ApiResponse } from "@/app/types/api";
-import { User } from "@/app/types/user";
-import UserInformation from "@/app/ui/user-information";
+import { ApiResponse } from "@/types/api";
+import { User } from "@/types/user";
+import UserInformation from "@/ui/user-information";
 
 export default async function UserProfilePage(props: {
   params: Promise<{ id: string }>;

@@ -1,51 +1,43 @@
 "use client";
 
-import { LoginSchema } from "@/app/schemas/auth";
-import { LoginRequest } from "@/app/types/auth";
-import Button from "@/app/ui/button";
-import Input from "@/app/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { login, LoginState } from "@/lib/actions";
+import Button from "@/ui/button";
+import Input from "@/ui/input";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useActionState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
+  const initialState: LoginState = {
+    message: "",
+    errors: {} as { email?: string[]; password?: string[] },
+  };
+  const [state, formAction] = useActionState(login, initialState);
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginRequest>({
-    resolver: zodResolver(LoginSchema),
-  });
 
-  const onSubmit = async (data: LoginRequest) => {
-    const res = await fetch("/api/login", {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-
-    const json = await res.json();
-
-    if (!res.ok) {
-      toast.error("Error: " + json.error || "Something went wrong", {
+  useEffect(() => {
+    if (state.success && state.message) {
+      toast.success(state.message, {
         position: "bottom-right",
+        duration: 3000,
       });
-      return;
+
+      router.push("/");
     }
 
-    toast.success("Login successful! Redirecting...", {
-      position: "bottom-right",
-    });
-
-    router.push("/");
-  };
-
+    if (!state.success && state.message) {
+      toast.error(state.message, {
+        position: "bottom-right",
+        duration: 3000,
+      });
+    }
+  }, [state.success, state.message, router]);
   return (
     <div className="flex justify-center items-center w-screen h-screen">
       <form
         className="flex flex-col items-center min-w-[500px] rounded-xl bg-white px-16 py-20"
-        onSubmit={handleSubmit(onSubmit)}
+        action={formAction}
       >
         <div className="space-y-2 text-center">
           <h1 className="text-4xl font-bold">Hello!</h1>
@@ -55,19 +47,30 @@ export default function LoginPage() {
           <Input
             label="Email"
             placeholder="Email"
-            {...register("email")}
-            error={errors.email?.message}
+            name="email"
+            error={state.errors?.email?.[0]}
           />
           <Input
             label="Password"
             placeholder="Password"
             type="password"
-            {...register("password")}
-            error={errors.password?.message}
+            name="password"
+            error={state.errors?.password?.[0]}
           />
         </div>
 
-        <Button className="mt-12">Login</Button>
+        <div className="w-full text-right">
+          <Button className="mt-12">Login</Button>
+          <span className="text-sm text-gray-600">
+            Don&apos;t have an account?{" "}
+            <Link
+              href={"/register"}
+              className="text-blue-500 hover:underline hover:text-blue-600"
+            >
+              Register
+            </Link>
+          </span>
+        </div>
       </form>
     </div>
   );
