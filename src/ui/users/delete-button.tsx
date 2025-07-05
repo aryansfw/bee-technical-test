@@ -1,6 +1,7 @@
 "use client";
 
-import { DeleteState, deleteUser } from "@/lib/actions";
+import { deleteUser } from "@/actions/user";
+import { DeleteUserState } from "@/types/user";
 import { TrashIcon } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
@@ -8,7 +9,7 @@ import toast from "react-hot-toast";
 import Button from "../button";
 
 export default function DeleteUserForm({ id }: { id: string }) {
-  const initialState: DeleteState = {
+  const initialState: DeleteUserState = {
     message: "",
   };
   const deleteUserWithId = deleteUser.bind(null, id);

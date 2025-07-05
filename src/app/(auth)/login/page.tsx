@@ -1,6 +1,7 @@
 "use client";
 
-import { login, LoginState } from "@/lib/actions";
+import { login } from "@/actions/auth";
+import { LoginState } from "@/types/auth";
 import Button from "@/ui/button";
 import Input from "@/ui/input";
 import Link from "next/link";

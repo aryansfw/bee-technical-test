@@ -8,3 +8,9 @@ export type PaginatedApiResponse<T> = {
   total_pages: number;
   per_page: number;
 } & ApiResponse<T[]>;
+
+export type State<ErrorData> = {
+  success?: boolean;
+  message?: string | null;
+  errors?: ErrorData;
+};

@@ -1,6 +1,6 @@
 "use client";
 
-import { logout } from "@/lib/actions";
+import { logout } from "@/actions/auth";
 import { HouseIcon, Icon, SignOutIcon, UsersIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

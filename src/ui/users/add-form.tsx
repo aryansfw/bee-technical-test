@@ -1,11 +1,12 @@
 "use client";
 
-import { addUser, UserState } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import toast from "react-hot-toast";
 import Button from "../button";
 import Input from "../input";
+import { addUser } from "@/actions/user";
+import { UserState } from "@/types/user";
 
 export default function AddUserForm() {
   const initialState: UserState = {

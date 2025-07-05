@@ -1,6 +1,7 @@
 "use client";
 
-import { register, RegisterState } from "@/lib/actions";
+import { register } from "@/actions/auth";
+import { RegisterState } from "@/types/auth";
 import Button from "@/ui/button";
 import Input from "@/ui/input";
 import Link from "next/link";
