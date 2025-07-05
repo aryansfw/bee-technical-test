@@ -16,17 +16,19 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-4xl font-bold">Home</h1>
+      <h1 className="md:text-2xl text-xl font-bold">Home</h1>
       <section>
-        <div className="flex flex-col gap-8 px-8 py-8 rounded-xl bg-white min-w-lg w-fit shadow-lg">
-          <span className="text-gray-500">Your Information:</span>
-          <div className="flex justify-between space-x-4">
+        <div className="flex flex-col gap-8 px-4 py-4 md:px-8 md:py-8 rounded-xl bg-white w-full md:min-w-lg md:w-fit shadow-lg">
+          <span className="text-gray-500 text-sm md:text-base">
+            Your Information:
+          </span>
+          <div className="flex w-full justify-center md:justify-start">
             <div className="w-32 h-32 rounded-full overflow-hidden relative">
               <Image src={user.avatar} alt="user avatar" fill={true} />
             </div>
           </div>
           <table>
-            <tbody className="text-lg">
+            <tbody className="text-sm md:text-base">
               <tr>
                 <td className="font-semibold py-2">First Name</td>
                 <td>{user.first_name}</td>

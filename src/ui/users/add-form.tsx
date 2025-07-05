@@ -1,19 +1,19 @@
 "use client";
 
+import { addUser } from "@/actions/user";
+import { UserState } from "@/types/user";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import toast from "react-hot-toast";
 import Button from "../button";
 import Input from "../input";
-import { addUser } from "@/actions/user";
-import { UserState } from "@/types/user";
 
 export default function AddUserForm() {
   const initialState: UserState = {
     message: "",
     errors: {} as { name?: string[]; job?: string[] },
   };
-  const [state, formAction] = useActionState(addUser, initialState);
+  const [state, formAction, isPending] = useActionState(addUser, initialState);
   const router = useRouter();
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function AddUserForm() {
         placeholder="Job"
         error={state.errors?.job?.[0]}
       />
-      <Button>Add User</Button>
+      <Button isLoading={isPending}>Add User</Button>
     </form>
   );
 }

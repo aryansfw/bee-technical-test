@@ -87,6 +87,7 @@ export async function editUser(
   }
 
   revalidatePath("/users");
+  revalidatePath("/users/[id");
 
   return {
     success: true,

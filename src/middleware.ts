@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  console.log(pathname);
   if (pathname === "/" || pathname.startsWith("/users")) {
     const token = request.cookies.get("token")?.value;
 

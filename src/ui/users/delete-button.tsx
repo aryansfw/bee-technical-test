@@ -13,7 +13,10 @@ export default function DeleteUserForm({ id }: { id: string }) {
     message: "",
   };
   const deleteUserWithId = deleteUser.bind(null, id);
-  const [state, formAction] = useActionState(deleteUserWithId, initialState);
+  const [state, formAction, isPending] = useActionState(
+    deleteUserWithId,
+    initialState
+  );
   const router = useRouter();
 
   useEffect(() => {
@@ -36,8 +39,8 @@ export default function DeleteUserForm({ id }: { id: string }) {
 
   return (
     <form action={formAction} className="space-y-4">
-      <Button icon={TrashIcon} buttonType="danger">
-        Delete
+      <Button isLoading={isPending} icon={TrashIcon} buttonType="danger">
+        <span className="hidden md:block">Delete</span>
       </Button>
     </form>
   );

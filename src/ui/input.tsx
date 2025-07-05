@@ -20,8 +20,8 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> &
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, label, error, ...props }, ref) => {
     return (
-      <div className="w-full flex flex-col gap-1">
-        {label && <label className="font-medium">{label}</label>}
+      <div className="w-full flex flex-col gap-1 text-sm md:text-base">
+        {label && <label className="font-medium text-gray-600">{label}</label>}
         <div className="relative">
           <input
             ref={ref}

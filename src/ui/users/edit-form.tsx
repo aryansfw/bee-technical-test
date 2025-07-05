@@ -18,7 +18,10 @@ export default function EditUserForm({
     errors: {} as { name?: string[]; job?: string[] },
   };
   const editUserWithId = editUser.bind(null, user.id);
-  const [state, formAction] = useActionState(editUserWithId, initialState);
+  const [state, formAction, isPending] = useActionState(
+    editUserWithId,
+    initialState
+  );
   const router = useRouter();
 
   useEffect(() => {
@@ -28,7 +31,7 @@ export default function EditUserForm({
         duration: 3000,
       });
 
-      router.push("/users");
+      router.push(`/users/${user.id}`);
     }
 
     if (!state.success && state.message) {
@@ -37,7 +40,7 @@ export default function EditUserForm({
         duration: 3000,
       });
     }
-  }, [state.success, state.message, router]);
+  }, [state.success, state.message, router, user.id]);
 
   return (
     <form action={formAction} className="space-y-4">
@@ -55,7 +58,7 @@ export default function EditUserForm({
         defaultValue={user.job}
         error={state.errors?.job?.[0]}
       />
-      <Button>Edit User</Button>
+      <Button isLoading={isPending}>Edit User</Button>
     </form>
   );
 }

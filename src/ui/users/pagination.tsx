@@ -22,7 +22,7 @@ export default function UsersPagination({
   const pages = generatePagination(currentPage, totalPages);
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 md:text-base text-sm">
       <Link
         href={createPageLink(currentPage - 1)}
         className={cn(
