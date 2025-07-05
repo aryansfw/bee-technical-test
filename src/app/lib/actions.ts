@@ -1,0 +1,101 @@
+"use server";
+import { revalidatePath } from "next/cache";
+import z from "zod";
+
+const UserSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  job: z.string().min(1, "Job is required"),
+});
+
+export type UserState = {
+  success?: boolean;
+  message?: string | null;
+  errors?: {
+    name?: string[];
+    job?: string[];
+  };
+};
+
+export async function addUser(_prevState: UserState, formData: FormData) {
+  const data = {
+    name: formData.get("name"),
+    job: formData.get("job"),
+  };
+
+  const validated = UserSchema.safeParse(data);
+
+  if (!validated.success) {
+    return {
+      success: false,
+      errors: validated.error.flatten().fieldErrors,
+      message: "Validation failed",
+    };
+  }
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/users`, {
+    method: "POST",
+    headers: {
+      "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    return {
+      success: false,
+      message: "Failed to add user",
+    };
+  }
+
+  revalidatePath("/users");
+
+  return {
+    success: true,
+    message: "User added successfully",
+  };
+}
+
+export async function editUser(
+  id: string,
+  _prevState: UserState,
+  formData: FormData
+) {
+  const data = {
+    name: formData.get("name"),
+    job: formData.get("job"),
+  };
+
+  const validated = UserSchema.safeParse(data);
+
+  if (!validated.success) {
+    return {
+      success: false,
+      errors: validated.error.flatten().fieldErrors,
+      message: "Validation failed",
+    };
+  }
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/users`, {
+    method: "POST",
+    headers: {
+      "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    return {
+      success: false,
+      message: "Failed to edit user",
+    };
+  }
+
+  revalidatePath("/users");
+
+  return {
+    success: true,
+    message: "User edited successfully",
+  };
+}

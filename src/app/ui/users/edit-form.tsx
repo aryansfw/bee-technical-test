@@ -1,18 +1,23 @@
 "use client";
 
-import { addUser, UserState } from "@/app/lib/actions";
+import { editUser, UserState } from "@/app/lib/actions";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import toast from "react-hot-toast";
 import Button from "../button";
 import Input from "../input";
 
-export default function AddUserForm() {
+export default function EditUserForm({
+  user,
+}: {
+  user: { id: string; name: string; job: string };
+}) {
   const initialState: UserState = {
     message: "",
     errors: {} as { name?: string[]; job?: string[] },
   };
-  const [state, formAction] = useActionState(addUser, initialState);
+  const editUserWithId = editUser.bind(null, user.id);
+  const [state, formAction] = useActionState(editUserWithId, initialState);
   const router = useRouter();
 
   useEffect(() => {
@@ -39,15 +44,17 @@ export default function AddUserForm() {
         name="name"
         label="Name"
         placeholder="Name"
+        defaultValue={user.name}
         error={state.errors?.name?.[0]}
       />
       <Input
         name="job"
         label="Job"
         placeholder="Job"
+        defaultValue={user.job}
         error={state.errors?.job?.[0]}
       />
-      <Button>Add User</Button>
+      <Button>Edit User</Button>
     </form>
   );
 }
